@@ -43,7 +43,6 @@ class NanoRelationInitCharacteristic(Characteristic):
             # クライアントがレスポンスを期待している場合は、正常終了を通知
             callback(Characteristic.RESULT_SUCCESS)
 
-        bleno.stopAdvertising()
         iBeacon_start()
 
     def onReadRequest(self, offset, callback):
