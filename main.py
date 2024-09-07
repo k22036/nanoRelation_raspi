@@ -34,6 +34,7 @@ class NanoRelationInitCharacteristic(Characteristic):
         except IndexError:
             print('device public key is not found')
             callback(Characteristic.RESULT_UNLIKELY_ERROR)
+            return
 
         print('device private key: ' + PRIVATE_KEY)
         print('device public key: ' + PUBLIC_KEY)
