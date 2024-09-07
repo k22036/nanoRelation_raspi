@@ -31,6 +31,11 @@ class NanoRelationInitCharacteristic(Characteristic):
             callback(Characteristic.RESULT_UNLIKELY_ERROR)
             return
 
+        if not private_key or not public_key:
+            print('device private key or public key is not found')
+            callback(Characteristic.RESULT_UNLIKELY_ERROR)
+            return
+
         config.set_PRIVATE_KEY(private_key)
         config.set_PUBLIC_KEY(public_key)
         print('device private key: ' + config.PRIVATE_KEY)
