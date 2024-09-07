@@ -20,6 +20,13 @@ class Config:
             self._NANORELATION_INIT_SERVICE_UUID = 'AAAAAAAA-8883-49A8-8BDB-42BC1A7107F4'
             self._NANORELATION_INIT_CHARACTERISTIC_UUID = 'BBBBBBBB-201F-44EB-82E8-10CC02AD8CE1'
 
+            # 16バイト
+            self._iBeacon_uuid = 'e2c56db5dffb48d2b060d0f5a71096e0'
+            # 2バイト
+            self._iBeacon_major = 1
+            # 2バイト
+            self._iBeacon_minor = 1
+
             self._DEVICE_ID = ''
             self._PRIVATE_KEY = ''
             self._PUBLIC_KEY = ''
@@ -38,6 +45,27 @@ class Config:
     @property
     def NANORELATION_INIT_CHARACTERISTIC_UUID(self):
         return self._NANORELATION_INIT_CHARACTERISTIC_UUID
+
+    # iBeacon_uuid
+    @property
+    def iBeacon_uuid(self):
+        return self._iBeacon_uuid
+
+    # iBeacon_major
+    @property
+    def iBeacon_major(self):
+        return self._iBeacon_major
+
+    def set_iBeacon_major(self, major):
+        self._iBeacon_major = major
+
+    # iBeacon_minor
+    @property
+    def iBeacon_minor(self):
+        return self._iBeacon_minor
+
+    def set_iBeacon_minor(self, minor):
+        self._iBeacon_minor = minor
 
     # DEVICE_ID
     @property

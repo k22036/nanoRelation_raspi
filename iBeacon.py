@@ -15,9 +15,9 @@ ibeacon_prefix = bytes([
 ])
 
 # UUID (16バイト), Major (2バイト), Minor (2バイト), TX Power (1バイト)
-uuid = bytes.fromhex('e2c56db5dffb48d2b060d0f5a71096e0')
-major = (1).to_bytes(2, byteorder='big')
-minor = (1).to_bytes(2, byteorder='big')
+uuid = bytes.fromhex(config.iBeacon_uuid)
+major = (config.iBeacon_major).to_bytes(2, byteorder='big')
+minor = (config.iBeacon_minor).to_bytes(2, byteorder='big')
 tx_power = (200).to_bytes(1, byteorder='big')
 
 # 完全なiBeaconパケット
