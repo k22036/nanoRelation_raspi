@@ -25,7 +25,7 @@ nanoRelationInitCharacteristic = NanoRelationInitCharacteristic()
 
 def onAdvertisingStart(error):
     print('on -> advertisingStart: ' +
-          ('error ' + error if error else 'success'))
+          ('error ' + str(error) if error else 'success'))
 
     if not error:
         bleno.setServices([
