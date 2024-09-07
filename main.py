@@ -43,5 +43,8 @@ bleno.on('advertisingStart', onAdvertisingStart)
 bleno.start()
 
 
-while True:
-    input('Press <Enter> to stop...\n')
+try:
+    input("Press Enter to stop...\n")
+finally:
+    bleno.stopAdvertising()
+    bleno.disconnect()
