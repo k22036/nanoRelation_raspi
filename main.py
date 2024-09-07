@@ -29,7 +29,11 @@ class NanoRelationInitCharacteristic(Characteristic):
         # バイトデータを文字列に変換（デコード）
         raw_data = data.decode('utf-8').split(',')
         PRIVATE_KEY = raw_data[0]
-        PUBLIC_KEY = raw_data[1]
+        try:
+            PUBLIC_KEY = raw_data[1]
+        except IndexError:
+            print('device public key is not found')
+            callback(Characteristic.RESULT_UNLIKELY_ERROR)
 
         print('device private key: ' + PRIVATE_KEY)
         print('device public key: ' + PUBLIC_KEY)
@@ -86,4 +90,4 @@ bleno.start()
 
 
 while True:
-    input('Press <Enter> to stop...')
+    input('Press <Enter> to stop...\n')
