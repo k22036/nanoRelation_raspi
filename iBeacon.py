@@ -34,5 +34,7 @@ def onStateChange(state):
         bleno.stopAdvertising()
 
 
-# イベントリスナーの登録
-bleno.on('stateChange', onStateChange)
+def iBeacon_start():
+    # イベントリスナーの登録
+    bleno.on('stateChange', onStateChange)
+    bleno.start()
