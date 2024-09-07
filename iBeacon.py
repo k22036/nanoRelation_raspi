@@ -40,4 +40,3 @@ def iBeacon_start():
 
     bleno.stopAdvertising()
     bleno.disconnect()
-    bleno.start()
