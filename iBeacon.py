@@ -24,19 +24,10 @@ tx_power = (200).to_bytes(1, byteorder='big')
 ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
 
 
-def onStateChange(state):
-    print('on -> stateChange: ' + state)
-
-    if state == 'poweredOn':
-        # iBeaconの広告を開始
-        bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
-    else:
-        bleno.stopAdvertising()
-
-
 def iBeacon_start():
-    # イベントリスナーの登録
-    bleno.on('stateChange', onStateChange)
 
     bleno.stopAdvertising()
     bleno.disconnect()
+
+    bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
+    print('start iBeacon')
