@@ -5,6 +5,7 @@ bleno = config.bleno
 
 
 def iBeacon_start():
+    global ibeacon_packet
     # iBeaconの広告パケットの構成
     ibeacon_prefix = bytes([
         0x02, 0x01, 0x1A,  # Flags
@@ -24,5 +25,17 @@ def iBeacon_start():
     # 完全なiBeaconパケット
     ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
 
-    # iBeaconの広告を開始
-    bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
+
+def onStateChange(state):
+    global ibeacon_packet
+    print('on -> stateChange: ' + state)
+
+    if state == 'poweredOn':
+        # iBeaconの広告を開始
+        bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
+    else:
+        bleno.stopAdvertising()
+
+
+# イベントリスナーの登録
+bleno.on('stateChange', onStateChange)
