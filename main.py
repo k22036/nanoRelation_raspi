@@ -83,3 +83,7 @@ def onAdvertisingStart(error):
 bleno.on('advertisingStart', onAdvertisingStart)
 
 bleno.start()
+
+
+while True:
+    input('Press <Enter> to stop...')
