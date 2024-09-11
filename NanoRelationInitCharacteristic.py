@@ -70,6 +70,7 @@ class NanoRelationInitCharacteristic(Characteristic):
             print("Write request without response")
         else:
             # クライアントがレスポンスを期待している場合は、正常終了を通知
+            print("Write request with response")
             callback(Characteristic.RESULT_SUCCESS)
 
         iBeacon_start()
