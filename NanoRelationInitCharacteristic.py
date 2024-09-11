@@ -73,7 +73,7 @@ class NanoRelationInitCharacteristic(Characteristic):
             print("Write request with response")
             callback(Characteristic.RESULT_SUCCESS)
 
-        iBeacon_start()
+        # iBeacon_start()
 
     def onReadRequest(self, offset, callback):
         device_id = config.generate_device_id()
