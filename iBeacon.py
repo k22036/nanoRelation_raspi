@@ -26,7 +26,6 @@ def iBeacon_start():
     ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
 
     bleno.stopAdvertising()
-    bleno.disconnect()
 
     bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
     print('start iBeacon')

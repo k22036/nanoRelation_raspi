@@ -20,7 +20,7 @@ class NanoRelationInitCharacteristic(Characteristic):
 
         self._updateValueCallback = None
 
-    async def onWriteRequest(self, data, offset, withoutResponse, callback):
+    def onWriteRequest(self, data, offset, withoutResponse, callback):
         # バイトデータを文字列に変換（デコード）
         raw_data = data.decode('utf-8').split(',')
         private_key = raw_data[0]
@@ -65,15 +65,16 @@ class NanoRelationInitCharacteristic(Characteristic):
         print('major: ' + str(config.iBeacon_major))
         print('minor: ' + str(config.iBeacon_minor))
 
+        iBeacon_start()
+
         if withoutResponse:
             # クライアントはレスポンスを期待していないので、何もしない
             print("Write request without response")
         else:
             # クライアントがレスポンスを期待している場合は、正常終了を通知
             print("Write request with response")
-            await callback(Characteristic.RESULT_SUCCESS)
-
-        iBeacon_start()
+            callback(Characteristic.RESULT_SUCCESS)
+            bleno.disconnect()
 
     def onReadRequest(self, offset, callback):
         device_id = config.generate_device_id()
