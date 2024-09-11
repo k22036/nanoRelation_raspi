@@ -14,17 +14,16 @@ ibeacon_prefix = bytes([
     0x15   # Length of remaining iBeacon data
 ])
 
-# UUID (16バイト), Major (2バイト), Minor (2バイト), TX Power (1バイト)
-uuid = bytes.fromhex(config.iBeacon_uuid)
-major = (config.iBeacon_major).to_bytes(2, byteorder='big')
-minor = (config.iBeacon_minor).to_bytes(2, byteorder='big')
-tx_power = (200).to_bytes(1, byteorder='big')
-
-# 完全なiBeaconパケット
-ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
-
 
 def iBeacon_start():
+    # UUID (16バイト), Major (2バイト), Minor (2バイト), TX Power (1バイト)
+    uuid = bytes.fromhex(config.iBeacon_uuid)
+    major = (config.iBeacon_major).to_bytes(2, byteorder='big')
+    minor = (config.iBeacon_minor).to_bytes(2, byteorder='big')
+    tx_power = (200).to_bytes(1, byteorder='big')
+
+    # 完全なiBeaconパケット
+    ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
 
     bleno.stopAdvertising()
     bleno.disconnect()
