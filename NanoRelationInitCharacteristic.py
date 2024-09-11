@@ -74,7 +74,6 @@ class NanoRelationInitCharacteristic(Characteristic):
             # クライアントがレスポンスを期待している場合は、正常終了を通知
             print("Write request with response")
             callback(Characteristic.RESULT_SUCCESS)
-            bleno.disconnect()
 
     def onReadRequest(self, offset, callback):
         device_id = config.generate_device_id()
