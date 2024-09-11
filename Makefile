@@ -6,3 +6,6 @@ bl-start:
 
 bl-stop:
 	sudo systemctl stop bluetooth
+
+bl-restart:
+	sudo systemctl restart bluetooth
