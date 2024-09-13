@@ -41,6 +41,7 @@ def onAdvertisingStart(error):
 bleno.on('advertisingStart', onAdvertisingStart)
 
 bleno.start()
+bleno.disconnect()
 
 
 try:
