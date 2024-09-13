@@ -12,7 +12,5 @@ def iBeacon_start():
     minor = (int(config.iBeacon_minor)).to_bytes(2, byteorder='big')
     measuredPower = -60
 
-    bleno.stopAdvertising()
-
     bleno.startAdvertisingIBeacon(uuid, major, minor, measuredPower)
     print('start iBeacon')
