@@ -35,11 +35,3 @@ bleno.on('advertisingStart', on_advertising_start)
 def iBeacon_start():
     bleno.start()
     print("Waiting for Bluetooth state change...")
-
-    try:
-        while True:
-            pass  # Keep the script running
-    except KeyboardInterrupt:
-        bleno.stopAdvertising()
-        bleno.disconnect()
-        print("Stopped advertising and disconnected")
