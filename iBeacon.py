@@ -20,12 +20,14 @@ def iBeacon_start():
     uuid = bytes.fromhex(config.iBeacon_uuid)
     major = (config.iBeacon_major).to_bytes(2, byteorder='big')
     minor = (config.iBeacon_minor).to_bytes(2, byteorder='big')
-    tx_power = (200).to_bytes(1, byteorder='big')
+    # tx_power = (200).to_bytes(1, byteorder='big')
 
     # 完全なiBeaconパケット
-    ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
+    # ibeacon_packet = ibeacon_prefix + uuid + major + minor + tx_power
 
     bleno.stopAdvertising()
 
-    bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
+    # bleno.startAdvertisingWithEIRData(ibeacon_packet, bytes([]))
     print('start iBeacon')
+
+    bleno.startAdvertisingIBeacon(uuid, major, minor, -55)
