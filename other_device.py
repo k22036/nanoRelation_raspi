@@ -33,3 +33,4 @@ bleno.on('advertisingStart', on_advertising_start)
 
 bleno.start()
 print("Waiting for Bluetooth state change...")
+input("Press Enter to stop...\n")
