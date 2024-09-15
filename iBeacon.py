@@ -33,5 +33,8 @@ bleno.on('advertisingStart', on_advertising_start)
 
 
 def iBeacon_start():
+    global major, minor
+    major = int(config.iBeacon_major)
+    minor = int(config.iBeacon_minor)
     bleno.start()
     print("Waiting for Bluetooth state change...")
