@@ -1,6 +1,9 @@
 start:
 	sudo python main.py
 
+other-start:
+	sudo python other_device.py
+
 bl-start:
 	sudo systemctl start bluetooth
 
