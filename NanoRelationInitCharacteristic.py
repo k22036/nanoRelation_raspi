@@ -23,32 +23,40 @@ class NanoRelationInitCharacteristic(Characteristic):
     def onWriteRequest(self, data, offset, withoutResponse, callback):
         # バイトデータを文字列に変換（デコード）
         raw_data = data.decode('utf-8').split(',')
-        private_key = raw_data[0]
-        if not private_key:
-            print('device private key is not found')
-            callback(Characteristic.RESULT_UNLIKELY_ERROR)
-            return
+
+        # private_key = raw_data[0]
+        # if not private_key:
+        #     print('device private key is not found')
+        #     callback(Characteristic.RESULT_UNLIKELY_ERROR)
+        #     return
+        # try:
+        #     public_key = raw_data[1]
+        # except IndexError:
+        #     print('device public key is not found')
+        #     callback(Characteristic.RESULT_UNLIKELY_ERROR)
+        #     return
+        # try:
+        #     major = raw_data[2]
+        # except IndexError:
+        #     print('major is not found')
+        #     callback(Characteristic.RESULT_UNLIKELY_ERROR)
+        #     return
+        # try:
+        #     minor = raw_data[3]
+        # except IndexError:
+        #     print('minor is not found')
+        #     callback(Characteristic.RESULT_UNLIKELY_ERROR)
+        #     return
+
+        # if not private_key or not public_key:
+        #     print('device private key or public key is not found')
+        #     callback(Characteristic.RESULT_UNLIKELY_ERROR)
+        #     return
+        major = raw_data[0]
         try:
-            public_key = raw_data[1]
-        except IndexError:
-            print('device public key is not found')
-            callback(Characteristic.RESULT_UNLIKELY_ERROR)
-            return
-        try:
-            major = raw_data[2]
-        except IndexError:
-            print('major is not found')
-            callback(Characteristic.RESULT_UNLIKELY_ERROR)
-            return
-        try:
-            minor = raw_data[3]
+            minor = raw_data[1]
         except IndexError:
             print('minor is not found')
-            callback(Characteristic.RESULT_UNLIKELY_ERROR)
-            return
-
-        if not private_key or not public_key:
-            print('device private key or public key is not found')
             callback(Characteristic.RESULT_UNLIKELY_ERROR)
             return
         if not major or not minor:
@@ -56,12 +64,12 @@ class NanoRelationInitCharacteristic(Characteristic):
             callback(Characteristic.RESULT_UNLIKELY_ERROR)
             return
 
-        config.set_PRIVATE_KEY(private_key)
-        config.set_PUBLIC_KEY(public_key)
+        # config.set_PRIVATE_KEY(private_key)
+        # config.set_PUBLIC_KEY(public_key)
         config.set_iBeacon_major(int(major))
         config.set_iBeacon_minor(int(minor))
-        print('device private key: ' + config.PRIVATE_KEY)
-        print('device public key: ' + config.PUBLIC_KEY)
+        # print('device private key: ' + config.PRIVATE_KEY)
+        # print('device public key: ' + config.PUBLIC_KEY)
         print('major: ' + str(config.iBeacon_major))
         print('minor: ' + str(config.iBeacon_minor))
 
