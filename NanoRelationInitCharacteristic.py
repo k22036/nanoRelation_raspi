@@ -5,16 +5,35 @@ from iBeacon import iBeacon_start
 config = Config()
 
 NANORELATION_INIT_SERVICE_UUID = config.NANORELATION_INIT_SERVICE_UUID
-NANORELATION_INIT_CHARACTERISTIC_UUID = config.NANORELATION_INIT_CHARACTERISTIC_UUID
+NANORELATION_INIT_CHARACTERISTIC_READ_UUID = config.NANORELATION_INIT_CHARACTERISTIC_READ_UUID
+NANORELATION_INIT_CHARACTERISTIC_WRITE_UUID = config.NANORELATION_INIT_CHARACTERISTIC_WRITE_UUID
 bleno = config.bleno
 
 
-class NanoRelationInitCharacteristic(Characteristic):
+class NanoRelationInitCharacteristic_read(Characteristic):
 
     def __init__(self):
         Characteristic.__init__(self, {
-            'uuid': NANORELATION_INIT_CHARACTERISTIC_UUID,
-            'properties': ['write', 'read'],
+            'uuid': NANORELATION_INIT_CHARACTERISTIC_READ_UUID,
+            'properties': ['read'],
+            'value': None
+        })
+
+        self._updateValueCallback = None
+
+    def onReadRequest(self, offset, callback):
+        device_id = config.generate_device_id()
+        print('ApproachCharacteristic - onReadRequest')
+        callback(result=Characteristic.RESULT_SUCCESS,
+                 data=device_id.encode())
+
+
+class NanoRelationInitCharacteristic_write(Characteristic):
+
+    def __init__(self):
+        Characteristic.__init__(self, {
+            'uuid': NANORELATION_INIT_CHARACTERISTIC_WRITE_UUID,
+            'properties': ['write'],
             'value': None
         })
 
@@ -82,9 +101,3 @@ class NanoRelationInitCharacteristic(Characteristic):
             # クライアントがレスポンスを期待している場合は、正常終了を通知
             print("Write request with response")
             callback(Characteristic.RESULT_SUCCESS)
-
-    def onReadRequest(self, offset, callback):
-        device_id = config.generate_device_id()
-        print('ApproachCharacteristic - onReadRequest')
-        callback(result=Characteristic.RESULT_SUCCESS,
-                 data=device_id.encode())

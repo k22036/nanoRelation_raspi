@@ -1,6 +1,6 @@
 from Config import Config
 from pybleno import *
-from NanoRelationInitCharacteristic import NanoRelationInitCharacteristic
+from NanoRelationInitCharacteristic import NanoRelationInitCharacteristic_read, NanoRelationInitCharacteristic_write
 
 config = Config()
 
@@ -20,7 +20,8 @@ def onStateChange(state):
 
 bleno.on('stateChange', onStateChange)
 
-nanoRelationInitCharacteristic = NanoRelationInitCharacteristic()
+nanoRelationInitCharacteristic_read = NanoRelationInitCharacteristic_read()
+nanoRelationInitCharacteristic_write = NanoRelationInitCharacteristic_write()
 
 
 def onAdvertisingStart(error):
@@ -32,7 +33,8 @@ def onAdvertisingStart(error):
             BlenoPrimaryService({
                 'uuid': NANORELATION_INIT_SERVICE_UUID,
                 'characteristics': [
-                    nanoRelationInitCharacteristic
+                    nanoRelationInitCharacteristic_read,
+                    nanoRelationInitCharacteristic_write
                 ]
             })
         ])
