@@ -40,7 +40,13 @@ def onAdvertisingStart(error):
         ])
 
 
+def onDisconnect(clientAddress):
+    print('on -> disconnect')
+    bleno.disconnect()
+
+
 bleno.on('advertisingStart', onAdvertisingStart)
+bleno.on('disconnect', onDisconnect)
 
 bleno.start()
 bleno.disconnect()
