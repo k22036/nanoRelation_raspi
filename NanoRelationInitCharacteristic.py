@@ -112,7 +112,7 @@ class NanoRelationInitCharacteristic_notify(Characteristic):
             'value': None
         })
 
-        self._value = 0
+        self._value = str(0).encode()
         self._updateValueCallback = None
 
     def onSubscribe(self, maxValueSize, updateValueCallback):

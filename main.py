@@ -60,14 +60,16 @@ counter = 0
 def task():
     global counter
     counter += 1
-    nanoRelationInitCharacteristic_notify._value = counter
+    nanoRelationInitCharacteristic_notify._value = str(counter).encode()
     if nanoRelationInitCharacteristic_notify._updateValueCallback:
 
         print('Sending notification with value : ' +
               str(nanoRelationInitCharacteristic_notify._value))
 
-        data = nanoRelationInitCharacteristic_notify._value
-        nanoRelationInitCharacteristic_notify._updateValueCallback(data=data)
+        notificationBytes = str(
+            nanoRelationInitCharacteristic_notify._value).encode()
+        nanoRelationInitCharacteristic_notify._updateValueCallback(
+            data=notificationBytes)
 
 
 try:
