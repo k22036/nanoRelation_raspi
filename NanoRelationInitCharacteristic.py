@@ -101,3 +101,24 @@ class NanoRelationInitCharacteristic_write(Characteristic):
             # クライアントがレスポンスを期待している場合は、正常終了を通知
             print("Write request with response")
             callback(Characteristic.RESULT_SUCCESS)
+
+
+class NanoRelationInitCharacteristic_notify(Characteristic):
+
+    def __init__(self):
+        Characteristic.__init__(self, {
+            'uuid': config.NANORELATION_INIT_CHARACTERISTIC_NOTIFY_UUID,
+            'properties': ['notify'],
+            'value': None
+        })
+
+        self._value = 0
+        self._updateValueCallback = None
+
+    def onSubscribe(self, maxValueSize, updateValueCallback):
+        print('ApproachCharacteristic - onSubscribe')
+        self._updateValueCallback = updateValueCallback
+
+    def onUnsubscribe(self):
+        print('ApproachCharacteristic - onUnsubscribe')
+        self._updateValueCallback = None

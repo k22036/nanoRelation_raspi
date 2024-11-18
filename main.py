@@ -1,6 +1,7 @@
+import time
 from Config import Config
 from pybleno import *
-from NanoRelationInitCharacteristic import NanoRelationInitCharacteristic_read, NanoRelationInitCharacteristic_write
+from NanoRelationInitCharacteristic import NanoRelationInitCharacteristic_read, NanoRelationInitCharacteristic_write, NanoRelationInitCharacteristic_notify
 
 config = Config()
 
@@ -22,6 +23,7 @@ bleno.on('stateChange', onStateChange)
 
 nanoRelationInitCharacteristic_read = NanoRelationInitCharacteristic_read()
 nanoRelationInitCharacteristic_write = NanoRelationInitCharacteristic_write()
+nanoRelationInitCharacteristic_notify = NanoRelationInitCharacteristic_notify()
 
 
 def onAdvertisingStart(error):
@@ -34,7 +36,8 @@ def onAdvertisingStart(error):
                 'uuid': NANORELATION_INIT_SERVICE_UUID,
                 'characteristics': [
                     nanoRelationInitCharacteristic_read,
-                    nanoRelationInitCharacteristic_write
+                    nanoRelationInitCharacteristic_write,
+                    nanoRelationInitCharacteristic_notify
                 ]
             })
         ])
@@ -51,9 +54,26 @@ bleno.on('disconnect', onDisconnect)
 bleno.start()
 bleno.disconnect()
 
+counter = 0
+
+
+def task():
+    global counter
+    counter += 1
+    nanoRelationInitCharacteristic_notify._value = counter
+    if nanoRelationInitCharacteristic_notify._updateValueCallback:
+
+        print('Sending notification with value : ' +
+              str(nanoRelationInitCharacteristic_notify._value))
+
+        data = nanoRelationInitCharacteristic_notify._value
+        nanoRelationInitCharacteristic_notify._updateValueCallback(data=data)
+
 
 try:
-    input("Press Enter to stop...\n")
+    while True:
+        task()
+        time.sleep(1)
 finally:
     bleno.stopAdvertising()
     bleno.disconnect()
