@@ -75,7 +75,7 @@ def task():
 try:
     while True:
         task()
-        time.sleep(1)
+        time.sleep(30)
 finally:
     bleno.stopAdvertising()
     bleno.disconnect()
